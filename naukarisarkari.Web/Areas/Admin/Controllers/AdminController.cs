@@ -24,7 +24,7 @@ namespace naukarisarkari.Areas.Admin.Controllers
             if (admin != null)
             {
                 // You can set session or cookie here
-                return Redirect("/Admin/Admin/Dashboard");
+                return RedirectToAction("Dashboard", "Admin", new { area = "Admin" });
             }
 
             ViewBag.Error = "Invalid credentials";

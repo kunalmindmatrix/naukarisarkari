@@ -1,15 +1,138 @@
 ﻿@{
     ViewBag.Title = "Admin Login";
 }
-<h2>Admin Login</h2>
+<!-- FontAwesome for eye icon -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
 
-<form method="post">
-    <input type="text" name="username" placeholder="Username" required />
-    <input type="password" name="password" placeholder="Password" required />
-    <button type="submit">Login</button>
-</form>
+<style>
+    body {
+        background: linear-gradient(to right, #4facfe, #00f2fe);
+        font-family: 'Segoe UI', sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        margin: 0;
+        padding: 20px;
+    }
 
-@if (ViewBag.Error != null)
-{
-    <p style="color:red">@ViewBag.Error</p>
-}
+    .login-box {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        padding: 40px 30px;
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
+    }
+
+    .login-box h2 {
+        margin-bottom: 20px;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .login-box .icon {
+        font-size: 40px;
+        margin-bottom: 15px;
+    }
+
+    .input-group {
+        position: relative;
+        margin-bottom: 20px;
+    }
+
+    .input-group input {
+        width: 100%;
+        padding: 12px 40px 12px 12px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        outline: none;
+        font-size: 14px;
+    }
+
+    .input-group .toggle-password {
+        position: absolute;
+        top: 50%;
+        right: 12px;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #888;
+        font-size: 18px;
+    }
+
+    .login-box button {
+        width: 100%;
+        background: #007bff;
+        border: none;
+        color: white;
+        padding: 12px;
+        font-size: 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+
+    .login-box button:hover {
+        background: #0056b3;
+    }
+
+    .error {
+        color: red;
+        margin-top: 10px;
+    }
+
+    /* Mobile Responsiveness */
+    @@media screen and (max-width: 480px) {
+        .login-box {
+            padding: 30px 20px;
+        }
+
+        .login-box h2 {
+            font-size: 20px;
+        }
+
+        .input-group input {
+            font-size: 13px;
+        }
+    }
+</style>
+
+<div class="login-box">
+    <div class="icon">🔐</div>
+    <h2>Admin Login</h2>
+
+    <form method="post">
+        <div class="input-group">
+            <input type="text" name="username" placeholder="Enter username" required />
+        </div>
+
+        <div class="input-group">
+            <input type="password" id="password" name="password" placeholder="Enter password" required />
+            <i class="fa-solid fa-eye toggle-password" onclick="togglePassword(this)"></i>
+        </div>
+
+        <button type="submit">Login</button>
+    </form>
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="error">@ViewBag.Error</div>
+    }
+</div>
+
+<script>
+    function togglePassword(iconElement) {
+        const passwordInput = document.getElementById("password");
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            iconElement.classList.remove("fa-eye");
+            iconElement.classList.add("fa-eye-slash");
+        } else {
+            passwordInput.type = "password";
+            iconElement.classList.remove("fa-eye-slash");
+            iconElement.classList.add("fa-eye");
+        }
+    }
+</script>
